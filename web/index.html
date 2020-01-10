@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+</head>
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<body>
+<table>
+    <tr>
+        <td>
+            用户名
+        </td>
+        <td>
+            <input type="text" name="uAcc" value="">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            密码
+        </td>
+        <td>
+            <input type="password" name="uPwd" value="">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button id="but_login" type="button">登录</button>
+        </td>
+        <td>
+            &nbsp;
+        </td>
+    </tr>
+</table>
+</body>
+<script>
+    $(function () {
+        $("#but_login").click(function () {
+            let t = {
+                uAcc:$("input[name=uAcc]").val(),
+                uPwd:$("input[name=uPwd]").val()
+            };
+            let t1 = [
+                {uAcc:"1111",uPwd:"33333"},
+                {uAcc:"2222",uPwd:"33333"},
+                ];
+            let j = JSON.stringify(t1);
+            $.ajax({
+                type:"post",
+                url:"loginAction",
+                dataType:"json",
+                data:j,
+                contentType:"application/json;charset=utf-8",
+                success:function (users) {
+                    for (let i = 0; i < users.length; i++) {
+                        console.log(users[i].uAcc);
+                        console.log(users[i].uPwd);
+                    }
+                }
+            });
+        });
+    });
+</script>
+</html>
